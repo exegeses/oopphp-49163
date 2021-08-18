@@ -3,7 +3,6 @@
     #### configuración general de sistema  ####
     session_start();
 
-
     function mostrar($dato)
     {
         echo '<pre>';
