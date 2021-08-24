@@ -21,8 +21,24 @@
         {
 
         }
-        public function agregarRegion()
+        public function agregarRegion( )
         {
+            $regNombre = $_POST['regNombre'];
+            $link = Conexion::conectar();
+            $sql = "INSERT INTO regiones
+                                ( regNombre )
+                            VALUE 
+                                ( :regNombre )";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':regNombre', $regNombre, PDO::PARAM_STR);
+
+            if ( $stmt->execute() ){
+                //registramos los atributos de objeto
+                $this->setRegID( $link->lastInsertId() );
+                $this->setRegNombre($regNombre);
+                return $this; //objeto Region
+            }
+            return false;
 
         }
         public function modificarRegion()
