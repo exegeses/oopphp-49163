@@ -20,6 +20,8 @@
                     <input type="text" name="regNombre" 
                            value="<?= $Region->getRegNombre(); ?>"
                            id="regNombre" class="form-control">
+                    <input type="hidden" name="regID"
+                           value="<?= $Region->getRegNombre() ?>">
                     </div>
 
                     <button class="btn btn-dark">Modificar región</button>
