@@ -3,20 +3,20 @@
     require 'clases/Conexion.php';
     require 'clases/Destino.php';
     $Destino = new Destino;
-    $chequeo = $Destino->agregarDestino();
+    $chequeo = $Destino->modificarDestino();
     include 'includes/over-all-header.html';
     include 'includes/nav.php';
 ?>
 
     <main class="container">
 
-        <h1>Alta de un destino</h1>
+        <h1>Modificacíon de un destino</h1>
 
         <?php
-            $mensaje = 'No se pudo agregar el destino';
+            $mensaje = 'No se pudo modificar el destino';
             $css     = 'danger';
             if( $chequeo ){
-                $mensaje = 'Destino '.$Destino->getDestNombre().' agregado correctamente';
+                $mensaje = 'Destino '.$Destino->getDestNombre().' modificado correctamente';
                 $css     = 'success';
             }
         ?>
