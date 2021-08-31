@@ -5,6 +5,7 @@
         private $destID;
         private $destNombre;
         private $regID;
+         static $regNombre;
         private $destPrecio;
         private $destAsientos;
         private $destDisponibles;
@@ -34,6 +35,32 @@
             return $destinos;
         }
 
+        public function verDestinoPorID()
+        {
+            $destID = $_GET['destID'];
+            $link = Conexion::conectar();
+            $sql = "SELECT
+                        destID, destNombre, 
+                        d.regID, regNombre,
+                        destPrecio, destAsientos, destDisponibles
+                     FROM destinos d, regiones r
+                     WHERE d.regID = r.regID
+                       AND destID = :destID";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+            $stmt->execute();
+            $destino = $stmt->fetch();
+            //registrar todos los atributos
+            $this->setDestID($destino['destID']);
+            $this->setDestNombre($destino['destNombre']);
+            $this->setRegID($destino['regID']);
+            self::setRegNombre($destino['regNombre']);
+            $this->setDestPrecio($destino['destPrecio']);
+            $this->setDestAsientos($destino['destAsientos']);
+            $this->setDestDisponibles($destino['destDisponibles']);
+            return $this;
+        }
+        
         public function agregarDestino()
         {
             $destNombre = $_POST['destNombre'];
@@ -177,5 +204,13 @@
             $this->destActivo = $destActivo;
         }
 
+        public static function getRegNombre()
+        {
+            return self::$regNombre;
+        }
+        public static function setRegNombre($regNombre)
+        {
+            self::$regNombre = $regNombre;
+        }
 
     }
