@@ -1,6 +1,10 @@
 <?php
 
     //require 'config/config.php';
+    require 'clases/Conexion.php';
+    require 'clases/Region.php';
+    $Region = new Region;
+    $regiones = $Region->listarRegiones();
     include 'includes/over-all-header.html';
     include 'includes/nav.php';
 ?>
@@ -24,6 +28,13 @@
                     <select name="regID" id="regID" 
                             class="form-control" required>
                         <option value="">Seleccione una región</option>
+            <?php
+                    foreach ( $regiones as $region ){
+            ?>
+                        <option value="<?= $region['regID'] ?>"><?= $region['regNombre'] ?></option>
+            <?php
+                    }
+            ?>
                     </select>
                     </div>
 
